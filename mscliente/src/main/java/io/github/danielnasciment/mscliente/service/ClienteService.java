@@ -21,7 +21,7 @@ public class ClienteService {
        return new ClienteResponse().toResponse(clienteRepository.save(cliente));
     }
 
-    public ClienteResponse buscarClientePorId(String cpf) throws ClienteNotFoundException{
+    public ClienteResponse buscarClientePorCpf(String cpf) throws ClienteNotFoundException{
 
         Optional<Cliente> possivelCliente = clienteRepository.findByCpf(cpf);
         

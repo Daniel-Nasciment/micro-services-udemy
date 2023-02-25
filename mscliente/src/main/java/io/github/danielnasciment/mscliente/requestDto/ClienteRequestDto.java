@@ -1,10 +1,18 @@
 package io.github.danielnasciment.mscliente.requestDto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class ClienteRequestDto {
 
+	@NotBlank
 	private String nome;
+	
+	@NotBlank
 	private String cpf;
-	private int idade;
+	
+	@NotNull
+	private Integer idade;
 
 	public String getNome() {
 		return nome;
@@ -14,7 +22,7 @@ public class ClienteRequestDto {
 		return cpf;
 	}
 
-	public int getIdade() {
+	public Integer getIdade() {
 		return idade;
 	}
 

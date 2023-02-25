@@ -1,19 +1,21 @@
 package io.github.danielnasciment.mscliente.controller.advice;
 
+import java.util.List;
+
 public class ErrorResponseDetails {
 	
 	private String titulo;
 	
 	private int status;
 	
-	private String detail;
+	private List<String> detail;
 	
 	private long timestamp;
 
 	public ErrorResponseDetails() {
 	}
-	
-	public ErrorResponseDetails(String titulo, int status, String detail, long timestamp) {
+
+	public ErrorResponseDetails(String titulo, int status, List<String> detail, long timestamp) {
 		this.titulo = titulo;
 		this.status = status;
 		this.detail = detail;
@@ -28,7 +30,7 @@ public class ErrorResponseDetails {
 		return status;
 	}
 
-	public String getDetail() {
+	public List<String> getDetail() {
 		return detail;
 	}
 
