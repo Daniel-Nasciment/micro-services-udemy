@@ -1,6 +1,15 @@
 spring:
   application:
     name: mscliente
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/
+    username:
+    password:
+    jpa:
+      hibernate.ddl-auto: update
+      generate-ddl: true
+      show-sql: true
 
 server:
   port: 0
