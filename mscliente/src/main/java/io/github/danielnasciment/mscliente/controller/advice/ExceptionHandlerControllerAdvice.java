@@ -1,5 +1,7 @@
 package io.github.danielnasciment.mscliente.controller.advice;
 
+import java.util.Date;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -14,7 +16,12 @@ public class ExceptionHandlerControllerAdvice {
 	@ExceptionHandler(ClienteNotFoundException.class)
 	@ResponseStatus(value = HttpStatus.NOT_FOUND)
 	public ResponseEntity<?> handlerClienteNotFoundException(ClienteNotFoundException ex){
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+		
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponseDetails(
+				"Cliente nao encontrado!", 
+				HttpStatus.NOT_FOUND.value(), 
+				ex.getMessage(),
+				new Date().getTime()));
 	}
 	
 }
