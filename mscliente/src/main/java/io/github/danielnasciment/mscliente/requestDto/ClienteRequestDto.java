@@ -3,6 +3,8 @@ package io.github.danielnasciment.mscliente.requestDto;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import io.github.danielnasciment.mscliente.domain.Cliente;
+
 public class ClienteRequestDto {
 
 	@NotBlank
@@ -24,6 +26,10 @@ public class ClienteRequestDto {
 
 	public Integer getIdade() {
 		return idade;
+	}
+
+	public Cliente toModel() {
+		return new Cliente(this.nome, this.cpf, this.idade);
 	}
 
 }

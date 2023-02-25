@@ -1,14 +1,20 @@
 package io.github.danielnasciment.mscliente.controller;
 
-import io.github.danielnasciment.mscliente.exceptions.ClienteNotFoundException;
-import io.github.danielnasciment.mscliente.requestDto.ClienteRequestDto;
-import io.github.danielnasciment.mscliente.service.ClienteService;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import io.github.danielnasciment.mscliente.exceptions.ClienteNotFoundException;
+import io.github.danielnasciment.mscliente.requestDto.ClienteRequestDto;
+import io.github.danielnasciment.mscliente.service.ClienteService;
 
 @RestController
 @RequestMapping(value = "/clientes")
@@ -19,7 +25,12 @@ public class ClienteController {
 
     @PostMapping
     public ResponseEntity<?> salvarNovoCliente(@RequestBody @Valid ClienteRequestDto request){
-        return ResponseEntity.ok().build();
+    	clienteService.salvarNovoCliente(request.toModel());
+        return ResponseEntity.created(ServletUriComponentsBuilder
+        		.fromCurrentRequest()
+        		.path("/{cpf}")
+        		.buildAndExpand(request.getCpf()).toUri())
+        		.build();
     }
 
     @GetMapping(value = "/{cpf}")
