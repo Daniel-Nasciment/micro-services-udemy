@@ -1,5 +1,8 @@
-package io.github.danielnasciment.mscloudgateway;
+# GATEWAY
 
+## Habilitando na classe principal do projeto
+
+```java
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -17,6 +20,9 @@ public class MscloudgatewayApplication {
 		SpringApplication.run(MscloudgatewayApplication.class, args);
 	}
 
+    // RouteLocator -> Fazer o roteamento direto para discovery server, no nosso caso, o eureka.
+    // lb://mscliente -> Significa que vai redirecionar para o loadBalancer para o ms cliente.
+
 	@Bean
 	public RouteLocator routes(RouteLocatorBuilder builder) {
 		return builder
@@ -26,3 +32,4 @@ public class MscloudgatewayApplication {
 	}
 	
 }
+```
