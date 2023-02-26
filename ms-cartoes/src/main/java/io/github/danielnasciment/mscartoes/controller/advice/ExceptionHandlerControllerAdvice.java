@@ -1,6 +1,7 @@
 package io.github.danielnasciment.mscartoes.controller.advice;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -10,6 +11,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+
+import io.github.danielnasciment.mscartoes.exception.RendaInvalidaException;
 
 @ControllerAdvice
 public class ExceptionHandlerControllerAdvice {
@@ -27,6 +30,18 @@ public class ExceptionHandlerControllerAdvice {
 				"Por favor, verifique se todos os campos foram preenchidos corretamente!", 
 				HttpStatus.BAD_REQUEST.value(), 
 				fieldsError,
+				new Date().getTime()));
+	}
+	
+	@ExceptionHandler(RendaInvalidaException.class)
+	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
+	public ResponseEntity<?> handlerRendaInvalidaException(RendaInvalidaException ex){
+		
+		
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponseDetails(
+				"Por favor, informe a renda apenas com números!", 
+				HttpStatus.BAD_REQUEST.value(), 
+				Arrays.asList(ex.getMessage()),
 				new Date().getTime()));
 	}
 	
