@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.github.danielnasciment.mscartoes.exception.ClienteNotFoundException;
 import io.github.danielnasciment.mscartoes.exception.RendaInvalidaException;
 import io.github.danielnasciment.mscartoes.requestDto.CartaoRequest;
 import io.github.danielnasciment.mscartoes.responseDto.CartaoResponse;
 import io.github.danielnasciment.mscartoes.service.CartaoService;
+import io.github.danielnasciment.mscartoes.service.ClienteService;
 
 @RestController
 @RequestMapping(value = "/cartoes")
@@ -28,6 +30,9 @@ public class CartoesController {
 	
 	@Autowired
 	private CartaoService cartaoService;
+	
+	@Autowired
+	private ClienteService clienteService;
 	
 	
 	@PostMapping
@@ -51,6 +56,13 @@ public class CartoesController {
 		return ResponseEntity.ok(cartoes);
 	}
 	
+	@GetMapping(value = "/listCartoes/{cpf}")
+	public ResponseEntity<?> listarCartoesPorCpf(@PathVariable String cpf) throws ClienteNotFoundException {
+		
+		return ResponseEntity.ok(clienteService.listCartoesByCpf(cpf));
+		
+	}
+
 
 
 }

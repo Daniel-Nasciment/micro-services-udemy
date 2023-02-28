@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import io.github.danielnasciment.mscartoes.exception.ClienteNotFoundException;
 import io.github.danielnasciment.mscartoes.exception.RendaInvalidaException;
 
 @ControllerAdvice
@@ -41,6 +42,17 @@ public class ExceptionHandlerControllerAdvice {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponseDetails(
 				"Por favor, informe a renda apenas com números!", 
 				HttpStatus.BAD_REQUEST.value(), 
+				Arrays.asList(ex.getMessage()),
+				new Date().getTime()));
+	}
+	
+	@ExceptionHandler(ClienteNotFoundException.class)
+	@ResponseStatus(value = HttpStatus.NOT_FOUND)
+	public ResponseEntity<?> handlerClienteNotFoundException(ClienteNotFoundException ex){
+		
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponseDetails(
+				"Cliente nao encontrado!", 
+				HttpStatus.NOT_FOUND.value(), 
 				Arrays.asList(ex.getMessage()),
 				new Date().getTime()));
 	}
