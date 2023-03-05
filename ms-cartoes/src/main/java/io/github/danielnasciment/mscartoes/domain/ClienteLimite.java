@@ -12,15 +12,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "CLIENTE")
-public class Cliente {
+@Table(name = "CLIENTE_LIMITE")
+public class ClienteLimite {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String nome;
-
 	private String cpf;
 	
 	@OneToMany(fetch = FetchType.EAGER)
@@ -30,10 +28,6 @@ public class Cliente {
 
 	public Long getId() {
 		return id;
-	}
-
-	public String getNome() {
-		return nome;
 	}
 
 	public String getCpf() {

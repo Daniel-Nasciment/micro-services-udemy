@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.github.danielnasciment.mscartoes.exception.ClienteNotFoundException;
+import io.github.danielnasciment.mscartoes.exception.CpfNotFoundException;
 import io.github.danielnasciment.mscartoes.exception.RendaInvalidaException;
 import io.github.danielnasciment.mscartoes.requestDto.CartaoRequest;
 import io.github.danielnasciment.mscartoes.responseDto.CartaoResponse;
 import io.github.danielnasciment.mscartoes.service.CartaoService;
-import io.github.danielnasciment.mscartoes.service.ClienteService;
+import io.github.danielnasciment.mscartoes.service.ClienteLimiteService;
 
 @RestController
 @RequestMapping(value = "/cartoes")
@@ -32,7 +32,7 @@ public class CartoesController {
 	private CartaoService cartaoService;
 	
 	@Autowired
-	private ClienteService clienteService;
+	private ClienteLimiteService clienteService;
 	
 	
 	@PostMapping
@@ -45,7 +45,7 @@ public class CartoesController {
 	
 	
 	@GetMapping(value = "/{renda}")
-	public ResponseEntity<?> getMethodName(@PathVariable String renda) throws RendaInvalidaException {
+	public ResponseEntity<?> getCartoesPorRenda(@PathVariable String renda) throws RendaInvalidaException {
 		
 		if(!renda.matches(REGEX_ONLY_NUMERIC_VALUES)) {
 			throw new RendaInvalidaException();
@@ -57,7 +57,7 @@ public class CartoesController {
 	}
 	
 	@GetMapping(value = "/listCartoes/{cpf}")
-	public ResponseEntity<?> listarCartoesPorCpf(@PathVariable String cpf) throws ClienteNotFoundException {
+	public ResponseEntity<?> listarCartoesPorCpf(@PathVariable String cpf) throws CpfNotFoundException {
 		
 		return ResponseEntity.ok(clienteService.listCartoesByCpf(cpf));
 		

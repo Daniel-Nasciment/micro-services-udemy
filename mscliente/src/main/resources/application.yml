@@ -3,7 +3,7 @@ spring:
     name: mscliente
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/clientes
+    url: jdbc:mysql://localhost:3306/dbMicroServices
     username: root
     password: root
   jpa:

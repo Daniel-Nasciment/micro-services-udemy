@@ -3,7 +3,7 @@ spring:
     name: mscartoes
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/cartoes
+    url: jdbc:mysql://localhost:3306/dbMicroServices
     username: root
     password: root
   jpa:
