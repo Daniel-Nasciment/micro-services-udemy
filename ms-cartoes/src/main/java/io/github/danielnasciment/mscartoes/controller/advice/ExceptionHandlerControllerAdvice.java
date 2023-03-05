@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import io.github.danielnasciment.mscartoes.exception.ClienteNotFoundException;
+import io.github.danielnasciment.mscartoes.exception.CpfNotFoundException;
 import io.github.danielnasciment.mscartoes.exception.RendaInvalidaException;
 
 @ControllerAdvice
@@ -46,9 +46,9 @@ public class ExceptionHandlerControllerAdvice {
 				new Date().getTime()));
 	}
 	
-	@ExceptionHandler(ClienteNotFoundException.class)
+	@ExceptionHandler(CpfNotFoundException.class)
 	@ResponseStatus(value = HttpStatus.NOT_FOUND)
-	public ResponseEntity<?> handlerClienteNotFoundException(ClienteNotFoundException ex){
+	public ResponseEntity<?> handlerClienteNotFoundException(CpfNotFoundException ex){
 		
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponseDetails(
 				"Cliente nao encontrado!", 
