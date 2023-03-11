@@ -10,9 +10,9 @@ Buscar na documentação as expressões que traduzem a query em SQL
 
 #
 
-## PASSO A PASSO CRIAÇAO DE SUBSCRIBER PARA RABBITMQ
+## MS CARTOES FOI CRIANDO UM LISTENER:
 
-#### *DEPENDENCIAS:*
+#### *DEPENDENCIAS ADICIONADAS:*
 
 ```pom.xml
 <dependency>
