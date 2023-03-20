@@ -14,18 +14,15 @@ import io.github.danielnasciment.msavaliador.requestDto.CartaoRequest;
 
 @Configuration
 @EnableRabbit
-public class RabbitConfig {
+public class SolicitaEmissaoCartaoPublisherRabbitMq {
 
 	@Autowired
-	private RabbitTemplate rabbitTemplate;
-	
-	@Autowired
-	private Queue queueEmissaoCartoes;
+	public RabbitTemplate rabbitTemplate;
 	
 	public void solicitaEmissaoCartao(CartaoRequest request) throws JsonProcessingException {
 		
 		 rabbitTemplate.convertAndSend(
-				 queueEmissaoCartoes.getName(), 
+				 queueEmissaoCartoes().getName(), 
 				 new ObjectMapper().writeValueAsString(request));
 		
 	}

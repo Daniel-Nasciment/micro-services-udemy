@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import io.github.danielnasciment.mscartoes.exception.CpfNotFoundException;
 import io.github.danielnasciment.mscartoes.exception.RendaInvalidaException;
+import io.github.danielnasciment.mscartoes.exception.SolicitacaoCartaoException;
 
 @ControllerAdvice
 public class ExceptionHandlerControllerAdvice {
@@ -53,6 +54,16 @@ public class ExceptionHandlerControllerAdvice {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponseDetails(
 				"Cliente nao encontrado!", 
 				HttpStatus.NOT_FOUND.value(), 
+				Arrays.asList(ex.getMessage()),
+				new Date().getTime()));
+	}
+	
+	@ExceptionHandler(SolicitacaoCartaoException.class)
+	public ResponseEntity<?> solicitacaoCartaoException(SolicitacaoCartaoException ex){
+		
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponseDetails(
+				"Erro ao solicitar emissao do cartao!",
+				HttpStatus.INTERNAL_SERVER_ERROR.value(), 
 				Arrays.asList(ex.getMessage()),
 				new Date().getTime()));
 	}
