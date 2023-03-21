@@ -33,3 +33,28 @@ public class MscloudgatewayApplication {
 	
 }
 ```
+
+
+#
+
+## HABILITANDO RESOURCE SERVER OAUTH2
+
+```pom.xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-oauth2-resource-server<artifact>
+</dependency>
+```
+
+#### No admin do keycloak vou ter uma sessao chamada *realm settings*, que por sua vez tera uma sessao chamada *endpoints*. Nesse local fica todos os endpoints do realm, para recuperar token, etc.
+
+#### **issuer** configuration
+
+```yaml
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8081/realms/msrealm
+```
