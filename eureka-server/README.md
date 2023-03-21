@@ -20,3 +20,51 @@ eureka:
     fetch-registry: false
 
 ```
+
+#
+
+## HABILITANDO SPRING SECURITY E CONFIGURANDO *SecurityFilterChain*
+
+#### link para documentaçao without WebSecurityConfigurerAdapter:
+
+> https://spring.io/blog/2022/02/21/spring-security-without-the-websecurityconfigureradapter
+
+```pom.xml
+<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+```
+
+
+``` yaml
+spring:
+  security:
+      user:
+        name: user
+        password: password
+
+```
+
+```java
+
+@EnableWebSecurity
+public class SecurityWebConfig {
+	
+	@Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+        	.csrf().disable()
+            .authorizeHttpRequests((authz) -> authz
+                .anyRequest().authenticated()
+            )
+            .httpBasic();
+        
+        return http.build();
+    }
+
+}
+
+
+```
+
