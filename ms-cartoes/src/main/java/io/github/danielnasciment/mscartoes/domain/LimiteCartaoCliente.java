@@ -1,19 +1,18 @@
 package io.github.danielnasciment.mscartoes.domain;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "CLIENTE_LIMITE")
-public class ClienteLimite {
+@Table(name = "LIMITE_CARTAO_CLIENTE")
+public class LimiteCartaoCliente {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,10 +20,20 @@ public class ClienteLimite {
 	
 	private String cpf;
 	
-	@OneToMany(fetch = FetchType.EAGER)
-	private List<Cartao> cartoes;
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Cartao cartao;
 	
 	private BigDecimal limite;
+	
+	@Deprecated
+	public LimiteCartaoCliente() {
+	}
+
+	public LimiteCartaoCliente(String cpf, Cartao cartao, BigDecimal limite) {
+		this.cpf = cpf;
+		this.cartao = cartao;
+		this.limite = limite;
+	}
 
 	public Long getId() {
 		return id;
@@ -34,13 +43,12 @@ public class ClienteLimite {
 		return cpf;
 	}
 
-	public List<Cartao> getCartoes() {
-		return cartoes;
+	public Cartao getCartao() {
+		return cartao;
 	}
 
 	public BigDecimal getLimite() {
 		return limite;
 	}
-	
 	
 }

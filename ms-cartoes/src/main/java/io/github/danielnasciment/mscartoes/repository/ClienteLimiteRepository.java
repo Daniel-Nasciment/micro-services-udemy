@@ -1,13 +1,16 @@
 package io.github.danielnasciment.mscartoes.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import io.github.danielnasciment.mscartoes.domain.ClienteLimite;
+import io.github.danielnasciment.mscartoes.domain.LimiteCartaoCliente;
 
-public interface ClienteLimiteRepository extends JpaRepository<ClienteLimite, Long> {
+@Repository
+public interface ClienteLimiteRepository extends JpaRepository<LimiteCartaoCliente, Long> {
 
-	public Optional<ClienteLimite> findByCpf(String cpf);
+	public List<Optional<LimiteCartaoCliente>> findByCpf(String cpf);
 	
 }

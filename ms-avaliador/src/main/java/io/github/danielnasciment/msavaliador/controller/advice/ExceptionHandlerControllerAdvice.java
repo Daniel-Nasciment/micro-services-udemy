@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import feign.FeignException;
 import feign.RetryableException;
 import io.github.danielnasciment.msavaliador.exeptions.CpfNotFoundException;
+import io.github.danielnasciment.msavaliador.exeptions.SolicitacaoCartaoException;
 
 @ControllerAdvice
 public class ExceptionHandlerControllerAdvice {
@@ -72,6 +73,18 @@ public class ExceptionHandlerControllerAdvice {
 				ex.request().httpMethod(), 
 				HttpStatus.valueOf(ex.status()), 
 				ex.request().url()));
+	}
+	
+	@ExceptionHandler(SolicitacaoCartaoException.class)
+	public ResponseEntity<?> solicitacaoCartaoException(SolicitacaoCartaoException ex){
+		
+		LOGGER.error("Solicitaçao Cartao exception: ", ex.getCause().getMessage());
+		
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponseDetails(
+				"Erro ao solicitar emissao do cartao!",
+				HttpStatus.INTERNAL_SERVER_ERROR.value(), 
+				Arrays.asList(ex.getMessage()),
+				new Date().getTime()));
 	}
 	
 }

@@ -28,7 +28,7 @@ public class Cartao {
 	private BigDecimal renda;
 	
 	private BigDecimal limiteBasico;
-
+	
 	@Deprecated
 	public Cartao() {
 	}
@@ -59,7 +59,5 @@ public class Cartao {
 	public BigDecimal getLimiteBasico() {
 		return limiteBasico;
 	}
-	
-	
 	
 }

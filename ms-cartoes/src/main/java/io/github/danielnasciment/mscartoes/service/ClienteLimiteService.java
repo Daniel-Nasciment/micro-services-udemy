@@ -1,11 +1,12 @@
 package io.github.danielnasciment.mscartoes.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import io.github.danielnasciment.mscartoes.domain.ClienteLimite;
+import io.github.danielnasciment.mscartoes.domain.LimiteCartaoCliente;
 import io.github.danielnasciment.mscartoes.exception.CpfNotFoundException;
 import io.github.danielnasciment.mscartoes.repository.ClienteLimiteRepository;
 import io.github.danielnasciment.mscartoes.responseDto.ListCartoesPorCpfResponse;
@@ -19,14 +20,14 @@ public class ClienteLimiteService {
 	
 	public ListCartoesPorCpfResponse listCartoesByCpf(String cpf) throws CpfNotFoundException {
 		
-		Optional <ClienteLimite> clienteLimiteECartoes = clienteLimiteRepository.findByCpf(cpf);
+		List<Optional<LimiteCartaoCliente>> cartoes = clienteLimiteRepository.findByCpf(cpf);
 		
-		if(clienteLimiteECartoes.isPresent()) {
-			return new ListCartoesPorCpfResponse().toResponse(clienteLimiteECartoes.get());
-		}
-	
-		throw new CpfNotFoundException("CPF não encontrado!");
-	
+		ListCartoesPorCpfResponse response = new ListCartoesPorCpfResponse();
+		
+		cartoes.forEach(c -> response.toResponse(c));
+		
+		return response;
+		
 	}
 	
 	

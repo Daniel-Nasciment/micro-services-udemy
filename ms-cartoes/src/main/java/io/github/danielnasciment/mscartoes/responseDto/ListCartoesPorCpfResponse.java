@@ -3,8 +3,9 @@ package io.github.danielnasciment.mscartoes.responseDto;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-import io.github.danielnasciment.mscartoes.domain.ClienteLimite;
+import io.github.danielnasciment.mscartoes.domain.LimiteCartaoCliente;
 
 public class ListCartoesPorCpfResponse {
 
@@ -25,13 +26,15 @@ public class ListCartoesPorCpfResponse {
 		return cartoesResponse;
 	}
 
-	public ListCartoesPorCpfResponse toResponse(ClienteLimite cliente) {
+	public void toResponse(Optional<LimiteCartaoCliente> possivelCartao) {
 
-		this.cpf = cliente.getCpf();
-		this.limite = cliente.getLimite();
-		cliente.getCartoes().forEach(c -> this.cartoesResponse.add(new CartaoResponse().toResponse(c)));
-
-		return this;
+		if(possivelCartao.isPresent()) {
+			LimiteCartaoCliente cartao = possivelCartao.get();
+			this.cpf = cartao.getCpf();
+			this.limite = cartao.getLimite();
+			this.cartoesResponse.add(new CartaoResponse().toResponse(cartao.getCartao()));
+		}
+		
 	}
 
 }
