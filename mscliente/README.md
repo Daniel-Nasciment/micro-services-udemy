@@ -23,3 +23,5 @@ eureka:
 ```
 
 A configuraçao *client* acima, é para informarmos onde a aplicaçao ira se registrar, no nosso caso, o eureka-server fica em ***http://localhost:8761/eureka***. E a configuraçao *instance* é o nome da instancia que sera registrada no eureka, nesse cenario, utilizamos uma ***expression language*** para concatenar no nome do ms à um valor randomico. De forma que identificaquemos o MS pelo nome, e que o id de instancia seja dinamico.
+
+
