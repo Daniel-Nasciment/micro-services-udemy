@@ -7,4 +7,7 @@ RUN mvn clean install -DskipTests
 FROM openjdk:11
 WORKDIR /app
 COPY --from=build ./app/target/*.jar ./app.jar
+ARG EUREKA_SERVER=defatult
+ARG RABBITMQ_SERVER=defatult
+ARG MYSQL_SERVER=defatult
 ENTRYPOINT java -jar app.jar

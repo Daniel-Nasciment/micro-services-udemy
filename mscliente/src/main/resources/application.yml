@@ -3,7 +3,7 @@ spring:
     name: mscliente
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://mysql-container:3306/dbmicroservices
+    url: jdbc:mysql://${MYSQL_SERVER}:3306/dbmicroservices
     username: root
     password: root
   jpa:
@@ -23,7 +23,7 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
     service-url:
-      defaultZone: http://ms-user-eureka:-euemkasreurs-@eureka:8761/eureka
+      defaultZone: http://ms-user-eureka:-euemkasreurs-@${EUREKA_SERVER}:8761/eureka
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
     
