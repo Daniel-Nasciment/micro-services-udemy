@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  eureka:
+    image: eureka:1.1
+    container_name: eureka-container
+    ports:
+      - 8761:8761
+    networks:
+      - avaliador-credito
+
+  mysql:
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: dbmicroservices
+    image: mysql:8.0.27
+    container_name: mysql-container-01
+    networks:
+      - avaliador-credito
+
+networks:
+  avaliador-credito:
+    driver: bridge
+    name: avaliador-credito
+
