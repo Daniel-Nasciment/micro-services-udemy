@@ -38,3 +38,4 @@ Nesse caso foi necessário configurar o ***Frontend URL*** para sobrescrever a *
 
 *URL com **nome** e **porta** do container docker*
 >http://keycloak:8080/realms/msrealm
+

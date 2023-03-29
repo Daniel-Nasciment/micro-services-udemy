@@ -72,3 +72,20 @@ Seguido todas os passos acima, o resultado esperado é que os containers estejam
 
 
 
+### REALM 
+* Pode ser uma aplicaçao, ou um conjunto de aplicaçoes. Basicamente significa dominio. 
+
+
+# 
+
+# Dependencia Open API usado nos MS
+
+```pom.xml
+<dependency>
+  <groupId>org.springdoc</groupId>
+  <artifactId>springdoc-openapi-ui</artifactId>
+  <version>1.6.15</version>
+</dependency>
+```
+
+
