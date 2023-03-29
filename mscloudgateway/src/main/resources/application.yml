@@ -1,10 +1,16 @@
 spring:
   application:
     name: gateway
-  security:    oauth2:      resourceserver:        jwt:          issuer-uri: http://localhost:8081/realms/msrealm
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://${KEYCLOAK_SERVER}:${KEYCLOAK_PORT}/realms/msrealm
   cloud:
     gateway:
-      discovery:        locator:          enabled: true
+      discovery:
+        locator:
+          enabled: true
           lower-case-service-id: true
   
 server:
@@ -15,7 +21,7 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
     service-url:
-      defaultZone: http://ms-user-eureka:-euemkasreurs-@localhost:8761/eureka
+      defaultZone: http://ms-user-eureka:-euemkasreurs-@${EUREKA_SERVER}:8761/eureka
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 

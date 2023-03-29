@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  msclient:
+    environment:
+      MYSQL_SERVER: "mysql-container-01"
+      EUREKA_SERVER: "eureka-container"
+    image: mscliente:2.1
+    container_name: mscliente-01
+    networks:
+      - avaliador-credito
+
+networks:
+  avaliador-credito:
+    driver: bridge
+    name: avaliador-credito
